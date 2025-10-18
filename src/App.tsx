@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
-import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github, Star, TrendingUp, Award } from 'lucide-react';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,8 +19,16 @@ function App() {
       document.documentElement.classList.add('dark');
     }
 
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
   }, []);
 
   const toggleDarkMode = () => {
@@ -128,10 +138,21 @@ function App() {
         )}
       </nav>
 
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-[#F5F5F7] to-white dark:from-[#0F0F0F] dark:via-[#1A1A1A] dark:to-[#0F0F0F]">
+      <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-[#F5F5F7] to-white dark:from-[#0F0F0F] dark:via-[#1A1A1A] dark:to-[#0F0F0F]">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#007AFF]/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#007AFF]/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#007AFF]/5 rounded-full blur-3xl animate-pulse"
+            style={{
+              transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
+            }}
+          ></div>
+          <div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#007AFF]/5 rounded-full blur-3xl animate-pulse delay-1000"
+            style={{
+              transform: `translate(${-mousePosition.x * 0.015}px, ${-mousePosition.y * 0.015}px)`
+            }}
+          ></div>
+          <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         </div>
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
@@ -158,20 +179,39 @@ function App() {
 
           <div className="mt-20 relative">
             <div className="relative mx-auto max-w-5xl">
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-transform duration-500">
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-all duration-500 hover:shadow-[#007AFF]/20 hover:shadow-3xl">
                 <div className="bg-white dark:bg-[#1A1A1A] rounded-2xl shadow-xl p-12">
                   <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse delay-100"></div>
+                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded animate-pulse delay-200"></div>
                   </div>
                   <div className="space-y-4">
-                    <div className="h-4 bg-[#007AFF]/20 rounded w-3/4"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full"></div>
-                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6"></div>
+                    <div className="h-4 bg-[#007AFF]/20 rounded w-3/4 animate-pulse"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-full animate-pulse delay-150"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 animate-pulse delay-300"></div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div className="text-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <div className="text-4xl font-bold text-[#007AFF] mb-2">50+</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Progetti completati</div>
+            </div>
+            <div className="text-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+              <div className="text-4xl font-bold text-[#007AFF] mb-2">100%</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Clienti soddisfatti</div>
+            </div>
+            <div className="text-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+              <div className="text-4xl font-bold text-[#007AFF] mb-2">24/7</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Supporto dedicato</div>
+            </div>
+            <div className="text-center animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+              <div className="text-4xl font-bold text-[#007AFF] mb-2">5★</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Rating medio</div>
             </div>
           </div>
         </div>
@@ -179,8 +219,9 @@ function App() {
 
       <section
         id="chi-siamo"
-        className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors"
+        className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors relative overflow-hidden"
       >
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#007AFF] to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold text-[#0F0F0F] dark:text-white mb-6">
@@ -193,44 +234,51 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            <div className="group">
-              <div className="bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="aspect-square bg-gradient-to-br from-[#007AFF]/20 to-[#007AFF]/5 rounded-2xl mb-6 flex items-center justify-center">
-                  <Code2 className="w-24 h-24 text-[#007AFF]" />
+            {[{
+              name: 'Marco Rossi',
+              icon: Code2,
+              desc: 'Full-stack developer con passione per l\'architettura software e l\'ottimizzazione delle performance. Specializzato in React e Node.js.',
+              skills: ['React', 'Node.js', 'TypeScript']
+            }, {
+              name: 'Luca Bianchi',
+              icon: Sparkles,
+              desc: 'UI/UX designer e frontend developer. Trasformo idee in interfacce eleganti e intuitive con attenzione maniacale ai dettagli.',
+              skills: ['Figma', 'Tailwind', 'Animation']
+            }].map((founder, idx) => (
+              <div key={idx} className="group">
+                <div className="bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 hover:rotate-1">
+                  <div className="aspect-square bg-gradient-to-br from-[#007AFF]/20 to-[#007AFF]/5 rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#007AFF]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <founder.icon className="w-24 h-24 text-[#007AFF] group-hover:scale-110 transition-transform duration-500" />
+                  </div>
+                  <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-3">
+                    {founder.name}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+                    {founder.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {founder.skills.map((skill) => (
+                      <span key={skill} className="px-3 py-1 bg-[#007AFF]/10 text-[#007AFF] text-xs rounded-full">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-3">
-                  Marco Rossi
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Full-stack developer con passione per l'architettura software e
-                  l'ottimizzazione delle performance. Specializzato in React e
-                  Node.js.
-                </p>
               </div>
-            </div>
-
-            <div className="group">
-              <div className="bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                <div className="aspect-square bg-gradient-to-br from-[#007AFF]/20 to-[#007AFF]/5 rounded-2xl mb-6 flex items-center justify-center">
-                  <Sparkles className="w-24 h-24 text-[#007AFF]" />
-                </div>
-                <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-3">
-                  Luca Bianchi
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  UI/UX designer e frontend developer. Trasformo idee in interfacce
-                  eleganti e intuitive con attenzione maniacale ai dettagli.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section
         id="servizi"
-        className="py-32 bg-[#F5F5F7] dark:bg-[#1A1A1A] transition-colors"
+        className="py-32 bg-[#F5F5F7] dark:bg-[#1A1A1A] transition-colors relative"
       >
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-[#007AFF]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-[#007AFF]/5 rounded-full blur-3xl"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold text-[#0F0F0F] dark:text-white mb-6">
@@ -241,9 +289,9 @@ function App() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="group bg-white dark:bg-[#0F0F0F] rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+          <div className="relative z-10 grid md:grid-cols-3 gap-8">
+            <div className="group bg-white dark:bg-[#0F0F0F] rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-[#007AFF]/20">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                 <Code2 className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-4">
@@ -255,8 +303,8 @@ function App() {
               </p>
             </div>
 
-            <div className="group bg-white dark:bg-[#0F0F0F] rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="group bg-white dark:bg-[#0F0F0F] rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-[#007AFF]/20">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                 <Sparkles className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-4">
@@ -268,8 +316,8 @@ function App() {
               </p>
             </div>
 
-            <div className="group bg-white dark:bg-[#0F0F0F] rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <div className="group bg-white dark:bg-[#0F0F0F] rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-[#007AFF]/20">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
                 <Zap className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-4">
@@ -284,7 +332,8 @@ function App() {
         </div>
       </section>
 
-      <section id="portfolio" className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors">
+      <section id="portfolio" className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors relative">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#007AFF] to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-6xl font-bold text-[#0F0F0F] dark:text-white mb-6">
@@ -296,10 +345,11 @@ function App() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {[1, 2, 3, 4, 5, 6].map((item) => (
+            {[1, 2, 3, 4, 5, 6].map((item, idx) => (
               <div
                 key={item}
-                className="group relative aspect-[4/3] bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer"
+                className="group relative aspect-[4/3] bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer border border-transparent hover:border-[#007AFF]/30"
+                style={{ animationDelay: `${idx * 0.1}s` }}
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/10 to-transparent flex items-center justify-center">
                   <div className="text-center p-8">
@@ -317,7 +367,7 @@ function App() {
           </div>
 
           <div className="text-center">
-            <button className="group inline-flex items-center space-x-2 bg-[#0F0F0F] dark:bg-white text-white dark:text-[#0F0F0F] px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:scale-105">
+            <button className="group inline-flex items-center space-x-2 bg-[#0F0F0F] dark:bg-white text-white dark:text-[#0F0F0F] px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
               <span>Guarda tutti i progetti</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>

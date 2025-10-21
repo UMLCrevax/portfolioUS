@@ -201,7 +201,7 @@ function App() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-8 animate-fade-in">
-            <div className="inline-block mb-4">
+            <div className="inline-block mb-4 invisible pointer-events-none" aria-hidden="true">
               <span className="px-4 py-2 bg-[#007AFF]/10 text-[#007AFF] rounded-full text-sm font-medium">
                 Il futuro del web development
               </span>
@@ -292,14 +292,14 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
             {[{
-              name: 'Marco Rossi',
+              name: 'Michele Filidoro',
               icon: Code2,
               desc: 'Full-stack developer con passione per l\'architettura software e l\'ottimizzazione delle performance. Specializzato in React e Node.js.',
               skills: ['React', 'Node.js', 'TypeScript']
             }, {
-              name: 'Luca Bianchi',
+              name: 'Andrea Crevacore',
               icon: Sparkles,
-              desc: 'UI/UX designer e frontend developer. Trasformo idee in interfacce eleganti e intuitive con attenzione maniacale ai dettagli.',
+              desc: 'Full-stack developer e UI/UX designer e frontend developer. Trasformo idee in interfacce eleganti e intuitive con attenzione maniacale ai dettagli.',
               skills: ['Figma', 'Tailwind', 'Animation']
             }].map((founder, idx) => (
               <div key={idx} className="group">

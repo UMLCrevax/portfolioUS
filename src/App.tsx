@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github, Star, TrendingUp, Award, Rocket, Users, Target, CheckCircle2, MessageSquare, Calendar } from 'lucide-react';
+import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github, Star, TrendingUp, Award, Rocket, Users, Target, CheckCircle2, MessageSquare, Calendar, Sun, Moon } from 'lucide-react';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -99,9 +99,14 @@ function App() {
               </button>
               <button
                 onClick={toggleDarkMode}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
+                aria-label="Toggle dark mode"
               >
-                {isDarkMode ? '☀️' : '🌙'}
+                {isDarkMode ? (
+                  <Sun className="w-5 h-5 text-[#0F0F0F] dark:text-white" />
+                ) : (
+                  <Moon className="w-5 h-5 text-[#0F0F0F] dark:text-white" />
+                )}
               </button>
             </div>
 
@@ -157,6 +162,21 @@ function App() {
               >
                 Contatti
               </button>
+              <div className="pt-3 mt-3 border-t border-gray-200 dark:border-gray-700">
+                <button
+                  onClick={toggleDarkMode}
+                  className="flex items-center justify-between w-full px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300"
+                >
+                  <span className="text-sm text-[#0F0F0F] dark:text-white font-medium">
+                    {isDarkMode ? 'Modalità chiara' : 'Modalità scura'}
+                  </span>
+                  {isDarkMode ? (
+                    <Sun className="w-5 h-5 text-[#0F0F0F] dark:text-white" />
+                  ) : (
+                    <Moon className="w-5 h-5 text-[#0F0F0F] dark:text-white" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         )}

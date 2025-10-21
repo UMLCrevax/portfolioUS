@@ -1,11 +1,13 @@
-import { useState, useEffect, useRef } from 'react';
+import BookingForm from './components/BookingForm';
 import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github, Star, TrendingUp, Award, Rocket, Users, Target, CheckCircle2, MessageSquare, Calendar, Sun, Moon } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [showBooking, setShowBooking] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -606,7 +608,10 @@ function App() {
               Hai un'idea brillante? Parliamone. Trasformiamo la tua visione in
               realtà digitale.
             </p>
-            <button className="group inline-flex items-center space-x-2 bg-[#007AFF] hover:bg-[#0051D5] text-white px-10 py-5 rounded-full text-lg font-medium transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105">
+            <button
+              onClick={() => setShowBooking(true)}
+              className="group inline-flex items-center space-x-2 bg-[#007AFF] hover:bg-[#0051D5] text-white px-10 py-5 rounded-full text-lg font-medium transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105"
+            >
               <span>Prenota una call</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -649,6 +654,9 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* aggiungi il modal/form */}
+      <BookingForm open={showBooking} onClose={() => setShowBooking(false)} />
     </div>
   );
 }

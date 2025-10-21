@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github, Star, TrendingUp, Award } from 'lucide-react';
+import { ArrowRight, Code2, Sparkles, Zap, Menu, X, Linkedin, Github, Star, TrendingUp, Award, Rocket, Users, Target, CheckCircle2, MessageSquare, Calendar } from 'lucide-react';
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -74,10 +74,22 @@ function App() {
                 Servizi
               </button>
               <button
+                onClick={() => scrollToSection('processo')}
+                className="text-sm text-[#0F0F0F] dark:text-white hover:text-[#007AFF] transition-colors"
+              >
+                Processo
+              </button>
+              <button
                 onClick={() => scrollToSection('portfolio')}
                 className="text-sm text-[#0F0F0F] dark:text-white hover:text-[#007AFF] transition-colors"
               >
                 Portfolio
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonianze')}
+                className="text-sm text-[#0F0F0F] dark:text-white hover:text-[#007AFF] transition-colors"
+              >
+                Testimonianze
               </button>
               <button
                 onClick={() => scrollToSection('contatti')}
@@ -122,10 +134,22 @@ function App() {
                 Servizi
               </button>
               <button
+                onClick={() => scrollToSection('processo')}
+                className="block w-full text-left text-[#0F0F0F] dark:text-white hover:text-[#007AFF] transition-colors"
+              >
+                Processo
+              </button>
+              <button
                 onClick={() => scrollToSection('portfolio')}
                 className="block w-full text-left text-[#0F0F0F] dark:text-white hover:text-[#007AFF] transition-colors"
               >
                 Portfolio
+              </button>
+              <button
+                onClick={() => scrollToSection('testimonianze')}
+                className="block w-full text-left text-[#0F0F0F] dark:text-white hover:text-[#007AFF] transition-colors"
+              >
+                Testimonianze
               </button>
               <button
                 onClick={() => scrollToSection('contatti')}
@@ -157,24 +181,37 @@ function App() {
 
         <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 text-center">
           <div className="space-y-8 animate-fade-in">
+            <div className="inline-block mb-4">
+              <span className="px-4 py-2 bg-[#007AFF]/10 text-[#007AFF] rounded-full text-sm font-medium">
+                Il futuro del web development
+              </span>
+            </div>
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-[#0F0F0F] dark:text-white leading-tight tracking-tight">
-              Innovazione.
+              Trasformiamo idee
               <br />
-              Design.
+              in esperienze
               <br />
-              Performance.
+              <span className="text-[#007AFF]">straordinarie</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Due giovani sviluppatori, un'unica visione: portare il tuo brand nel
               futuro digitale.
             </p>
-            <button
-              onClick={() => scrollToSection('chi-siamo')}
-              className="group inline-flex items-center space-x-2 bg-[#007AFF] hover:bg-[#0051D5] text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              <span>Scopri di più</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button
+                onClick={() => scrollToSection('contatti')}
+                className="group inline-flex items-center space-x-2 bg-[#007AFF] hover:bg-[#0051D5] text-white px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+              >
+                <span>Inizia il tuo progetto</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+              <button
+                onClick={() => scrollToSection('portfolio')}
+                className="group inline-flex items-center space-x-2 bg-white dark:bg-[#1A1A1A] text-[#0F0F0F] dark:text-white border-2 border-gray-200 dark:border-gray-700 px-8 py-4 rounded-full text-lg font-medium transition-all duration-300 hover:border-[#007AFF] hover:scale-105"
+              >
+                <span>Vedi i progetti</span>
+              </button>
+            </div>
           </div>
 
           <div className="mt-20 relative">
@@ -271,6 +308,57 @@ function App() {
         </div>
       </section>
 
+      <section className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#0F0F0F] dark:text-white mb-6">
+              Innovazione. Design. Performance.
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              I tre pilastri del nostro approccio allo sviluppo web
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            <div className="group text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+                <Rocket className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-4">
+                Innovazione
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Utilizziamo le tecnologie più avanzate e le best practice del settore per creare soluzioni all'avanguardia.
+              </p>
+            </div>
+
+            <div className="group text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+                <Sparkles className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-4">
+                Design
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Ogni pixel è curato nei minimi dettagli per offrire un'esperienza utente eccezionale e memorabile.
+              </p>
+            </div>
+
+            <div className="group text-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg">
+                <Zap className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#0F0F0F] dark:text-white mb-4">
+                Performance
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Ottimizzazione estrema per garantire velocità, affidabilità e scalabilità in ogni situazione.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section
         id="servizi"
         className="py-32 bg-[#F5F5F7] dark:bg-[#1A1A1A] transition-colors relative"
@@ -332,7 +420,60 @@ function App() {
         </div>
       </section>
 
-      <section id="portfolio" className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors relative">
+      <section
+        id="processo"
+        className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors"
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#0F0F0F] dark:text-white mb-6">
+              Il nostro processo
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              Un metodo collaudato per trasformare la tua visione in realtà
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[{
+              icon: Target,
+              title: '1. Analisi',
+              desc: 'Comprendiamo a fondo le tue esigenze, obiettivi e il tuo pubblico target.'
+            }, {
+              icon: Code2,
+              title: '2. Sviluppo',
+              desc: 'Creiamo la soluzione perfetta con le tecnologie più adatte al tuo progetto.'
+            }, {
+              icon: Sparkles,
+              title: '3. Design',
+              desc: 'Realizziamo interfacce intuitive che trasformano visitatori in clienti.'
+            }, {
+              icon: Rocket,
+              title: '4. Launch',
+              desc: 'Lanciamo il tuo progetto e monitoriamo le performance per ottimizzare i risultati.'
+            }].map((step, idx) => (
+              <div key={idx} className="group relative">
+                <div className="bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-transparent hover:border-[#007AFF]/20">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#007AFF]/20 to-[#007AFF]/5 rounded-2xl flex items-center justify-center mb-6">
+                    <step.icon className="w-8 h-8 text-[#007AFF]" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-[#0F0F0F] dark:text-white mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
+                    {step.desc}
+                  </p>
+                </div>
+                {idx < 3 && (
+                  <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-[#007AFF]/50 to-transparent"></div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" className="py-32 bg-[#F5F5F7] dark:bg-[#1A1A1A] transition-colors relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#007AFF] to-transparent"></div>
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
@@ -371,6 +512,59 @@ function App() {
               <span>Guarda tutti i progetti</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="testimonianze"
+        className="py-32 bg-white dark:bg-[#0F0F0F] transition-colors relative overflow-hidden"
+      >
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#007AFF] to-transparent"></div>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#0F0F0F] dark:text-white mb-6">
+              Cosa dicono di noi
+            </h2>
+            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              La soddisfazione dei nostri clienti è la nostra migliore pubblicità
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[{
+              name: 'Maria Lombardi',
+              role: 'CEO, TechStart Italia',
+              text: 'NovaWeb ha trasformato completamente la nostra presenza online. Il sito è veloce, bellissimo e ha aumentato le conversioni del 250%.'
+            }, {
+              name: 'Alessandro Conti',
+              role: 'Founder, Digital Boutique',
+              text: 'Professionalità eccezionale. Hanno capito esattamente cosa volevamo e lo hanno realizzato superando ogni aspettativa.'
+            }, {
+              name: 'Sofia Ferrari',
+              role: 'Marketing Director, StyleCo',
+              text: 'Il livello di attenzione ai dettagli è impressionante. Ogni elemento è curato alla perfezione. Altamente raccomandati!'
+            }].map((testimonial, idx) => (
+              <div key={idx} className="group bg-gradient-to-br from-[#F5F5F7] to-white dark:from-[#1A1A1A] dark:to-[#0F0F0F] rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                <div className="flex items-center mb-4">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-5 h-5 text-[#007AFF] fill-[#007AFF]" />
+                  ))}
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6 italic">
+                  "{testimonial.text}"
+                </p>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#007AFF] to-[#0051D5] rounded-full flex items-center justify-center">
+                    <span className="text-white font-semibold">{testimonial.name[0]}</span>
+                  </div>
+                  <div>
+                    <div className="font-semibold text-[#0F0F0F] dark:text-white">{testimonial.name}</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
